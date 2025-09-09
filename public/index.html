@@ -24,10 +24,10 @@
         container.innerHTML = "";
 
         if (!data.matches || data.matches.length === 0) {
-          container.innerHTML = "<p>No matches found today.</p>";
-          return;
-        }
-
+  console.log("DEBUG → Fixtures API response:", data);
+  container.innerHTML = "<p>No matches found today.</p>";
+  return;
+}
         data.matches.forEach(match => {
           const div = document.createElement("div");
           div.className = "fixture";
