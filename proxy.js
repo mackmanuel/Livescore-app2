@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const API_KEY = "YOUR_FOOTBALL_DATA_KEY"; // put your Football-Data.org key here
+const API_KEY = "df08aa37234b4ae1a7a555af34b03850"; // put your Football-Data.org key here
 
 // Allow CORS for API requests
 app.use(cors());
