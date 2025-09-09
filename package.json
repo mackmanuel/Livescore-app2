@@ -1,7 +1,7 @@
 {
   "name": "livescore-proxy",
   "version": "1.0.0",
-  "description": "Proxy server for Football-Data.org API",
+  "description": "Proxy + frontend for Football-Data.org",
   "main": "proxy.js",
   "type": "module",
   "scripts": {
