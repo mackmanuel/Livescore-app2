@@ -1,14 +1,22 @@
 import express from "express";
 import fetch from "node-fetch";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
-const PORT = 5000;
-const API_KEY = "YOUR_FOOTBALL_DATA_KEY"; // put your key here
+const PORT = process.env.PORT || 5000;
+const API_KEY = "YOUR_FOOTBALL_DATA_KEY"; // put your Football-Data.org key here
 
+// Allow CORS for API requests
 app.use(cors());
 
-// Fixtures for a specific date
+// Static frontend serving
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "public")));
+
+// Fixtures route
 app.get("/fixtures", async (req, res) => {
   const { date } = req.query; // expects YYYY-MM-DD
   const url = `https://api.football-data.org/v4/matches?dateFrom=${date}&dateTo=${date}`;
@@ -40,6 +48,9 @@ app.get("/team-matches/:id", async (req, res) => {
   }
 });
 
-app.listen(PORT, () =>
-  console.log(`✅ Proxy running at http://localhost:${PORT}`)
-);
+// Fallback → serve index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
